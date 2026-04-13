@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ mun.long_name }}</title>
+        <script src="{% static 'sites/mun.js' %}" type="text/javascript" defer></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'sites/mun.css' %}">
+
+    </head>
+    <body>
+        <div class="Header">
+            <h2 class="Title"><a <a href="/sites/">Nova Scotia  <img class="Flag" src="{% static 'sites/Flag_of_Nova_Scotia.svg'%}"/></a>  >  <a href="/sites/{{ mun.short_name }}">{{ mun.long_name }}</a></h2>
+            <form class="Search" action="/search" method="get">
+                <input name="q" type="text" />
+                <input type="submit" value="Search!"></input>
+            </form>
+        </div>
+        <main>
+            {% for place in places_in_mun %}
+                <a href="/sites/{{ place.id }}" class="Listing">
+                {% if place.image0.url != None %}
+                <img src="{{ place.image0.url }}" class="ListingImage"/>
+                {% endif %}
+                <div class="ListingText">
+                <h2>{{ place.name }}</h2>
+                <p> {{ place.significance |safe }}</p>
+                </div>
+                </a>
+            {% endfor %}
+    </body>
+</html>

@@ -1,0 +1,27 @@
+body {
+    background-color: lightblue;
+    color: navy
+}
+
+button {
+    color: white;
+    background-color: navy;
+    border: 4px solid steelblue
+}
+
+img {
+    width: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+figure {
+  display: inline-block;
+  clear: top;
+  width: 31%;
+  height: 150px;
+  font-size: smaller;
+  margin: 1%;
+}
+
+

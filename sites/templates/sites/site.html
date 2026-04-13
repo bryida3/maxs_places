@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <script src="{% static 'sites/site.js' %}" type="text/javascript" defer></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'sites/mun.css' %}">
+
+    </head>
+    <body>
+        <div class="Header">
+            <h2 class="Title"><a <a href="/sites/">Nova Scotia  <img class="Flag" src="{% static 'sites/Flag_of_Nova_Scotia.svg'%}"/></a>  >  <a href="/sites/{{ place.mun.short_name }}">{{ place.mun.long_name }}</a></h2>
+            <form class="Search" action="/search" method="get">
+                <input name="q" type="text" />
+                <input type="submit" value="Search!"></input>
+            </form>
+        </div>
+        <main>
+            <div class="Listing">
+            <div class="ListingText">
+                <h2 id="PlaceName">{{ place.name  }}</h2>
+                <p id="Address">{{ place.address }}</p>
+                <p id="Location">{{ place.latitude }}, {{place.longitude}}</p>
+                <p id="Recognized">Recognized on {{ place.recognized }}</p>
+                {% if place.construction != None %}
+                    <p id="Construction">Built {{ place.construction }}</p>
+                {% endif %}
+            </div>
+            </div>
+            
+            <div class="Listing" id="Images">
+                {% if place.image0.url != None %}
+
+                    <img src="{{ place.image0.url }}" class="SiteImage"></img>
+                    <p class="ListingText"><br/>{{ place.image0text }}</p>
+                {% endif %}
+                {% if place.image1.url != None %}
+                    <img src="{{ place.image1.url }}" class="SiteImage"></img>
+                    <p class="ListingText"><br/>{{ place.image1text }}</p>
+                {% endif %}
+                {% if place.image2.url != None %}
+                    <img src="{{ place.image2.url }}" class="SiteImage"></img>
+                    <p class="ListingText"><br/>{{ place.image2text }}</p>
+                {% endif %}
+            </div>
+            
+            <p></p>
+            
+            <div class="Listing">
+            <button onclick="hide('StatementOfSignificance',this)">Statement Of Significance</button>
+            <button onclick="hide('Recognition',this)">Recognition</button>
+            <button onclick="hide('HistoricalInformation',this)">Historical Information</button>
+            <button onclick="hide('AdditionalInformation',this)">Additional Information</button>
+            </div>
+
+            <div class="InfoPanel" id="StatementOfSignificance">
+                <h2 class="MainHeader">Statement Of Significance</h2>
+                <p class="MainParagraph">{{ place.significance |safe }}
+                </p>
+            </div>
+            
+            <div class="InfoPanel" id="Recognition" hidden="hidden">
+                <h2 class="MainHeader">Recognition</h2>
+                <p class="MainParagraph">{{ place.recognition |safe }}
+                </p>
+            </div>
+            
+            <div class="InfoPanel" id="HistoricalInformation" hidden="hidden">
+                <h2 class="MainHeader">Historical Information</h2>
+                <p class="MainParagraph">{{ place.historical |safe }}
+                </p>
+            </div>
+            
+            <div class="InfoPanel" id="AdditionalInformation" hidden="hidden">
+                <h2 class="MainHeader">Additional Information</h2>
+                <p class="MainParagraph">{{ place.additional |safe }}
+                </p>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <title>Nova Scotia</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'sites/mun.css' %}">
+    </head>
+
+    <body>
+        <div class="Header">
+            <h2 class="Title"><a <a href="/sites/">Nova Scotia  <img class="Flag" src="{% static 'sites/Flag_of_Nova_Scotia.svg'%}"/></a></h2>
+            <form class="Search" action="/search" method="get">
+                <input name="q" type="text" />
+                <input type="submit" value="Search!"></input>
+            </form>
+        </div>
+
+        {% for mun in municipalities %}
+        <a href="/sites/{{ mun.short_name }}" class="Listing">
+            <h2 class="munText">{{ mun.long_name }}</h2>
+        </a>
+        {% endfor %}
+

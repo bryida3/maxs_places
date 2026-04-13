@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search Results</title>
+        <script src="{% static 'sites/mun.js' %}" type="text/javascript" defer></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'sites/mun.css' %}">
+
+    </head>
+    <body>
+        <div class="Header">
+            <h2 class="Title"><a <a href="/sites/">Nova Scotia  <img class="Flag" src="{% static 'sites/Flag_of_Nova_Scotia.svg'%}"/></a></h2>
+            <form class="Search" action="/search" method="get">
+                <input name="q" type="text" />
+                <input type="submit" value="Search!"></input>
+            </form>
+        </div>
+        <main>
+            {% for result in page.object_list %}
+                <a href="/sites/{{ result.object.id }}" class="Listing">
+                {% if result.object.image0.url != None %}
+                <img src="{{ result.object.image0.url }}" class="ListingImage"/>
+                {% endif %}
+                <div class="ListingText">
+                <h2>{{ result.object.name }}</h2>
+                <p> {{ result.object.significance |safe }}</p>
+                </div>
+                </a>
+                {% empty %}
+                     No results found.
+            {% endfor %}
+    </body>
+</html>
